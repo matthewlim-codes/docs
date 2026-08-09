@@ -4,6 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   description: "Noted is a high school messaging app with secure Supabase authentication.",
+  manifest: "/manifest.webmanifest",
   title: "Noted"
 };
 

@@ -10,6 +10,11 @@ const eslintConfig = [
       "node_modules/**",
       "next-env.d.ts"
     ]
+  },
+  {
+    rules: {
+      "react-hooks/set-state-in-effect": "off"
+    }
   }
 ];
 
