@@ -11,10 +11,20 @@ export function getSupabaseConfig(): SupabaseConfig {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
+  let urlValid = false;
+  if (url) {
+    try {
+      const { protocol } = new URL(url);
+      urlValid = protocol === "https:" || protocol === "http:";
+    } catch {
+      urlValid = false;
+    }
+  }
+
   return {
     anonKey: anonKey || FALLBACK_SUPABASE_ANON_KEY,
-    isConfigured: Boolean(url && anonKey),
-    url: url || FALLBACK_SUPABASE_URL
+    isConfigured: urlValid && Boolean(anonKey),
+    url: urlValid ? url! : FALLBACK_SUPABASE_URL
   };
 }
 

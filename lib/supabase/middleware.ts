@@ -22,7 +22,13 @@ export async function updateSession(request: NextRequest) {
     request
   });
 
-  const { anonKey, url } = getSupabaseConfig();
+  const { anonKey, isConfigured, url } = getSupabaseConfig();
+
+  // Skip auth checks when Supabase is not yet configured.
+  if (!isConfigured) {
+    return response;
+  }
+
   const supabase = createServerClient<Database>(url, anonKey, {
     cookies: {
       getAll() {
