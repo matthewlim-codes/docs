@@ -32,3 +32,8 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["npm", "start", "--", "--port", "5000"]
+build = ["npm", "run", "build"]
